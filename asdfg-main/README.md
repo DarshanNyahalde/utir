@@ -12,6 +12,8 @@ The interface retains the existing dark-purple hero, light dashboard, and sideba
 
 ⚙️ **Backend API:** https://utir.onrender.com
 
+⚙️ **Backend API:** https://utir.onrender.com/api/health
+
 📚 **API Documentation:** https://utir.onrender.com/docs
 
 ### Features
