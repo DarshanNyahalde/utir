@@ -1,0 +1,32 @@
+services:
+  api:
+    image: python:3.12-slim
+    working_dir: /workspace
+    volumes:
+      - ./backend:/workspace/backend
+    environment:
+      ELEXON_BASE_URL: ${ELEXON_BASE_URL:-https://data.elexon.co.uk/bmrs/api/v1}
+      ELEXON_REQUEST_TIMEOUT_SECONDS: ${ELEXON_REQUEST_TIMEOUT_SECONDS:-20}
+      ELEXON_CACHE_TTL_SECONDS: ${ELEXON_CACHE_TTL_SECONDS:-300}
+      WINDREADY_ALLOWED_ORIGINS: ${WINDREADY_ALLOWED_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173}
+    command: sh -c "pip install --disable-pip-version-check -q -r backend/requirements.txt && uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload"
+    ports:
+      - "8000:8000"
+
+  web:
+    image: node:22-alpine
+    working_dir: /workspace/frontend
+    volumes:
+      - ./frontend:/workspace/frontend
+      - frontend_node_modules:/workspace/frontend/node_modules
+    environment:
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-}
+      API_PROXY_TARGET: ${API_PROXY_TARGET:-http://api:8000}
+    command: sh -c "npm ci --silent && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
+volumes:
+  frontend_node_modules:
