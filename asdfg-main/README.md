@@ -4,6 +4,23 @@ WindReady is a wind-generation market intelligence dashboard for UK electricity 
 
 The interface retains the existing dark-purple hero, light dashboard, and sidebar. The dashboard and API are restricted to January 2026 for this challenge. No sample values or synthetic observations are used.
 
+## 🚀 Live Demo
+
+**AeroWise — Wind Energy Intelligence & Forecast Analytics**
+
+🌐 **Live Website:** https://utir-three.vercel.app
+
+⚙️ **Backend API:** https://utir.onrender.com
+
+📚 **API Documentation:** https://utir.onrender.com/docs
+
+### Features
+- Day-ahead wind forecast analysis
+- Actual vs. forecast comparison
+- Forecast accuracy metrics
+- Decision-cutoff-based forecast selection
+- Historical error analysis
+
 ## Architecture and data flow
 
 ```text
